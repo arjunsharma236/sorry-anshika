@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Aaru ❤️</title>
+<style>
+body{
+margin:0;
+padding:0;
+font-family:Arial;
+text-align:center;
+background:linear-gradient(to right,#ff4e50,#ff7eb3);
+color:white;
+overflow:hidden;
+}
+
+.card{
+background:rgba(0,0,0,0.65);
+width:450px;
+padding:30px;
+border-radius:20px;
+margin:80px auto;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+position:relative;
+z-index:2;
+}
+
+.glow{
+font-size:32px;
+animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #fff,0 0 20px #ff4e50;}
+to{text-shadow:0 0 20px #fff,0 0 40px #ff1e3c;}
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+margin:10px;
+font-size:16px;
+}
+
+#yesBtn{background:#ff1e3c;color:white;}
+#noBtn{background:white;color:#ff1e3c;position:relative;}
+
+#letter{display:none;margin-top:15px;}
+#countdown{font-size:18px;margin-top:10px;}
+
+.heart{
+position:absolute;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
+.slideshow{
+width:100%;
+height:200px;
+margin-top:15px;
+overflow:hidden;
+border-radius:10px;
+}
+
+.slideshow img{
+width:100%;
+height:200px;
+object-fit:cover;
+display:none;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="card">
+<h1>I'm Sorry ❤️</h1>
+<h2 class="glow">Aaru 💖</h2>
+
+<p>Aaru, you are my everything. Please forgive me.</p>
+
+<button onclick="openHeart()">Open My Heart 💌</button>
+
+<div id="letter">
+<p>
+Aaru ❤️  
+No matter what happens, I will always choose you.  
+I love you more than words can say.
+</p>
+
+<div id="countdown"></div>
+
+<div class="slideshow">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+</div>
+
+<h3>Will you forgive me? 🥺</h3>
+<button id="yesBtn" onclick="forgive()">Yes ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">No 😏</button>
+
+</div>
+</div>
+
+<audio id="music" loop>
+<source src="song.mp3" type="audio/mp3">
+</audio>
+
+<script>
+function openHeart(){
+document.getElementById("letter").style.display="block";
+document.getElementById("music").play();
+startFireworks();
+startCountdown();
+startSlideshow();
+}
+
+function forgive(){
+alert("Yaaay ❤️ I love you forever Aaru 💕");
+}
+
+function moveNo(){
+var btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.left=Math.random()*300+"px";
+btn.style.top=Math.random()*200+"px";
+}
+
+setInterval(function(){
+var heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+20)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},500);
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+function startFireworks(){
+setInterval(()=>{
+ctx.fillStyle="rgba(0,0,0,0.1)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.beginPath();
+ctx.arc(Math.random()*canvas.width,Math.random()*canvas.height,5,0,Math.PI*2);
+ctx.fillStyle="white";
+ctx.fill();
+},100);
+}
+
+function startCountdown(){
+var countDownDate=new Date("Dec 31, 2026 23:59:59").getTime();
+var x=setInterval(function(){
+var now=new Date().getTime();
+var distance=countDownDate-now;
+var days=Math.floor(distance/(1000*60*60*24));
+var hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+var minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+var seconds=Math.floor((distance%(1000*60))/1000);
+document.getElementById("countdown").innerHTML=
+"Forever Countdown: "+days+"d "+hours+"h "+minutes+"m "+seconds+"s ";
+},1000);
+}
+
+function startSlideshow(){
+var slides=document.querySelectorAll(".slideshow img");
+var index=0;
+slides[index].style.display="block";
+setInterval(()=>{
+slides[index].style.display="none";
+index=(index+1)%slides.length;
+slides[index].style.display="block";
+},2000);
+}
+</script>
+
+</body>
+</html>
+
